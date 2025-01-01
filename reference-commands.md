@@ -1,6 +1,7 @@
 # MySQL Pod Environment Variables - Command Reference Guide
 
 ### Project Content Table
+
 - [Section 1: Core Project Workflow](#section-1-core-project-workflow)
 - [Section 2: Advanced Operations](#section-2-advanced-operations)
 - [Section 3: Production Guide](#section-3-production-guide)
@@ -13,6 +14,7 @@
 ## Section 1: Core Project Workflow
 
 ### Step 1: Create MySQL Pod (Imperative Approach)
+
 ```bash
 # Create MySQL pod with environment variables
 kubectl run my-db --image=mysql:latest \
@@ -25,18 +27,23 @@ kubectl get pod my-db
 
 # Check pod status
 kubectl describe pod my-db
+
+# Get the yaml configuration file
+kubectl get pod my-db -o yaml > my-db.yaml
 ```
 
 ### Step 2: Create MySQL Pod (Declarative Approach)
+
 ```bash
 # Create pod using YAML definition
-kubectl create -f pod-definitions.yaml
+kubectl create -f env.yaml
 
 # View pod details
 kubectl describe pod my-db
 ```
 
 ### Step 3: Verify Environment Variables
+
 ```bash
 # Access pod shell
 kubectl exec -it my-db -- sh
@@ -49,6 +56,7 @@ exit
 ```
 
 ### Final Step: Cleanup
+
 ```bash
 # Remove MySQL pod
 kubectl delete pod my-db
@@ -60,6 +68,7 @@ kubectl get pods
 ## Section 2: Advanced Operations
 
 ### Pod Environment Verification
+
 ```bash
 # View pod logs
 kubectl logs my-db
@@ -72,6 +81,7 @@ kubectl get pod my-db --watch
 ```
 
 ### Database Access Verification
+
 ```bash
 # Access MySQL shell
 kubectl exec -it my-db -- mysql -u user1 -p
@@ -86,6 +96,7 @@ exit
 ## Section 3: Production Guide
 
 ### Production Setup
+
 ```bash
 # Create production namespace
 kubectl create namespace prod-db
@@ -99,6 +110,7 @@ kubectl run my-db --image=mysql:latest \
 ```
 
 ### Monitoring
+
 ```bash
 # Monitor pod health
 kubectl get pod my-db -n prod-db -w
@@ -111,6 +123,7 @@ kubectl logs -f my-db -n prod-db
 ```
 
 ### Backup Operations
+
 ```bash
 # Export pod definition
 kubectl get pod my-db -o yaml > mysql-pod-backup.yaml

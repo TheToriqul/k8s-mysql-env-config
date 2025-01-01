@@ -7,11 +7,9 @@
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
 ![YAML](https://img.shields.io/badge/YAML-CB171E?style=flat&logo=yaml&logoColor=white)
 
-
 ## 📋 Project Overview
 
 This project demonstrates advanced environment variable management in Kubernetes, specifically focusing on MySQL database configuration. Through hands-on implementation, I explore both imperative and declarative approaches to managing environment variables in Kubernetes pods. The project showcases secure and efficient methods for configuring MySQL instances in containerized environments.
-
 
 ## 🎯 Key Objectives
 
@@ -20,7 +18,6 @@ This project demonstrates advanced environment variable management in Kubernetes
 - Showcase secure credential management practices
 - Establish reproducible database environment setups
 - Create comprehensive configuration documentation
-
 
 ## 🏗️ Project Architecture
 
@@ -31,18 +28,17 @@ graph TD
         B --> C[MYSQL_ROOT_PASSWORD]
         B --> D[MYSQL_USER]
         B --> E[MYSQL_PASSWORD]
-        
+
         subgraph "Implementation Approaches"
             F[Imperative Approach]
             G[Declarative Approach]
         end
-        
+
         C --> F & G
         D --> F & G
         E --> F & G
     end
 ```
-
 
 ## 💻 Technical Stack
 
@@ -56,7 +52,6 @@ graph TD
   - kubectl CLI
   - YAML manifests
   - Docker runtime
-
 
 ## 🚀 Getting Started
 
@@ -93,6 +88,7 @@ graph TD
 <summary>🎮 Usage</summary>
 
 1. Create MySQL pod using imperative approach:
+
    ```bash
    kubectl run my-db --image=mysql:latest \
        --env="MYSQL_ROOT_PASSWORD=abc123" \
@@ -101,8 +97,9 @@ graph TD
    ```
 
 2. Or apply declarative configuration:
+
    ```bash
-   kubectl create -f pod-definitions.yaml
+   kubectl create -f env.yaml
    ```
 
 3. Verify deployment:
@@ -114,7 +111,6 @@ graph TD
 For comprehensive command reference, check [reference-commands.md](reference-commands.md).
 
 </details>
-
 
 ## 💡 Key Learnings
 
@@ -134,7 +130,6 @@ For comprehensive command reference, check [reference-commands.md](reference-com
 4. Technical documentation creation
 5. DevOps workflow optimization
 
-
 ### 🔄 Future Enhancements
 
 <details>
@@ -149,11 +144,9 @@ For comprehensive command reference, check [reference-commands.md](reference-com
 
 </details>
 
-
 ## 🙌 Contribution
 
 Contributions are welcome! Feel free to [open an issue](https://github.com/TheToriqul/k8s-mysql-env-config/issues) or submit a [pull request](https://github.com/TheToriqul/k8s-mysql-env-config/pulls) to enhance this project.
-
 
 ## 📧 Connect with Me
 
@@ -164,7 +157,6 @@ Contributions are welcome! Feel free to [open an issue](https://github.com/TheTo
 - 🌍 Portfolio: [TheToriqul.com](https://thetoriqul.com)
 
 Let's connect and discuss Kubernetes, databases, and cloud-native technologies!
-
 
 ## 👏 Acknowledgments
 
