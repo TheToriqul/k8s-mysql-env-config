@@ -87,7 +87,9 @@ graph TD
 <details>
 <summary>🎮 Usage</summary>
 
-1. Create MySQL pod using imperative approach:
+> ⚠️ **Security Warning**: This implementation uses environment variables directly for database credentials. This is suitable for learning purposes but **NOT recommended for production use**. In production environments, always use Kubernetes Secrets or a secure secrets management system to handle sensitive data.
+
+1. Create MySQL pod (Imperative Approach):
 
    ```bash
    kubectl run my-db --image=mysql:latest \
@@ -96,21 +98,33 @@ graph TD
        --env="MYSQL_PASSWORD=user1@mydb"
    ```
 
-2. Or apply declarative configuration:
+2. Or use Declarative Approach (env.yaml):
+  - Get the configuration file : [env.yaml](env.yaml)
+
+3. Apply the configuration:
 
    ```bash
    kubectl create -f env.yaml
    ```
 
-3. Verify deployment:
+4. Verify deployment:
    ```bash
    kubectl get pod my-db
    kubectl describe pod my-db
    ```
 
+> 🔒 **Production Best Practice**: For production deployments:
+>
+> - Use Kubernetes Secrets for sensitive data
+> - Implement proper access controls
+> - Consider using a secrets management solution
+> - Regularly rotate credentials
+> - Never store credentials in plain text or version control
+
 For comprehensive command reference, check [reference-commands.md](reference-commands.md).
 
 </details>
+
 
 ## 💡 Key Learnings
 

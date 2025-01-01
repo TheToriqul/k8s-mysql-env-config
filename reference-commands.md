@@ -10,13 +10,14 @@
 > **Description**: Command reference for managing MySQL database environment variables in Kubernetes  
 > **Learning Focus**: Environment variable configuration for containerized MySQL  
 > **Note**: Review and understand each command before execution.
+> ⚠️ **Important Security Notice**: The following commands are for learning purposes only. In production environments, sensitive data should be managed using Kubernetes Secrets or other secure secrets management solutions.
 
 ## Section 1: Core Project Workflow
 
 ### Step 1: Create MySQL Pod (Imperative Approach)
-
 ```bash
-# Create MySQL pod with environment variables
+# Create pod with environment variables
+# Note: Not recommended for production use
 kubectl run my-db --image=mysql:latest \
     --env="MYSQL_ROOT_PASSWORD=abc123" \
     --env="MYSQL_USER=user1" \
@@ -25,25 +26,27 @@ kubectl run my-db --image=mysql:latest \
 # Verify pod creation
 kubectl get pod my-db
 
-# Check pod status
+# Check pod configuration
 kubectl describe pod my-db
-
-# Get the yaml configuration file
-kubectl get pod my-db -o yaml > my-db.yaml
 ```
 
 ### Step 2: Create MySQL Pod (Declarative Approach)
-
 ```bash
-# Create pod using YAML definition
-kubectl create -f env.yaml
+# Generate pod definition YAML
+kubectl run my-db --image=mysql:latest \
+    --env="MYSQL_ROOT_PASSWORD=abc123" \
+    --env="MYSQL_USER=user1" \
+    --env="MYSQL_PASSWORD=user1@mydb" \
+    --dry-run=client -o yaml > my-db.yaml
+
+# Apply the configuration
+kubectl create -f my-db.yaml
 
 # View pod details
 kubectl describe pod my-db
 ```
 
 ### Step 3: Verify Environment Variables
-
 ```bash
 # Access pod shell
 kubectl exec -it my-db -- sh
@@ -134,15 +137,20 @@ kubectl logs my-db > mysql-pod.log
 
 ## Learning Notes
 
-1. Environment variables are crucial for MySQL configuration
-2. Variables must be set before pod creation
-3. Both imperative and declarative approaches are valid
-4. Pod recreation is required for environment variable changes
-5. Always verify environment variable propagation
+1. This is a learning implementation - not for production use
+2. In real-world scenarios, always use Kubernetes Secrets
+3. Environment variables are visible in pod specifications
+4. Credentials should never be stored in version control
+5. Production environments require proper secrets management
 
 ---
 
-> 💡 **Best Practice**: Use declarative YAML files for production deployments to ensure consistency and version control.
+> 💡 **Best Practice**: In production environments:
+> - Use Kubernetes Secrets for sensitive data
+> - Implement RBAC for access control
+> - Use external secrets management systems
+> - Regularly rotate credentials
+> - Encrypt sensitive data at rest
 
 > ⚠️ **Warning**: Protect sensitive credentials in production environments.
 
